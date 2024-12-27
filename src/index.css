@@ -1,3 +1,7 @@
+:root {
+    --color-main: #ffc2bd;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,5 +10,5 @@
 
 body {
     font-family: Helvetica, sans-serif;
-    background-color: #ffc2bd;
+    background-color: var(--color-main);
 }
