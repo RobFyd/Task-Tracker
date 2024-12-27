@@ -1,4 +1,5 @@
 import styles from "./App.module.css";
+import { Form } from "./components/Form/Form";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         </div>
         <button className={styles.button}>+</button>
       </header>
+      <Form />
     </div>
   );
 }

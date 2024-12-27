@@ -1,0 +1,14 @@
+.form {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+}
+
+.button {}
