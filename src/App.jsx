@@ -1,8 +1,8 @@
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
   return (
-    <div>
+    <div className={styles.container}>
       <header>
         <h1>Task Tracker</h1>
         <div>5 tasks</div>

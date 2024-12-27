@@ -1,0 +1,7 @@
+.container {
+    display: inline-block;
+    background-color: white;
+    padding: 32px 24px;
+    border-radius: 12px;
+    max-width: 800px;
+}
