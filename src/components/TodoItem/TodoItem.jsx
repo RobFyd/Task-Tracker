@@ -1,8 +1,8 @@
-export function TodoItem() {
+export function TodoItem({ name, done }) {
   return (
     <li>
-      <span>Undone</span>
-      <button>Done</button>
+      <span>{name}</span>
+      {!done && <button>Done</button>}
       <button>Delete</button>
     </li>
   );

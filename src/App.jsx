@@ -1,5 +1,6 @@
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
+import { TodoItem } from "./components/TodoItem/TodoItem";
 
 function App() {
   return (
@@ -13,15 +14,8 @@ function App() {
       </header>
       <Form />
       <ul>
-        <li>
-          <span>Undone</span>
-          <button>Done</button>
-          <button>Delete</button>
-        </li>
-        <li>
-          <span>Done</span>
-          <button>Delete</button>
-        </li>
+        <TodoItem name="test 1" done={false} />
+        <TodoItem name="test 2" done={true} />
       </ul>
     </div>
   );
