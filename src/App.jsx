@@ -4,8 +4,8 @@ import { TodoItem } from "./components/TodoItem/TodoItem";
 
 function App() {
   const todos = [
-    { name: "test 1", done: false, id: 1 },
-    { name: "test 2", done: true, id: 2 },
+    { name: "example 1", done: false, id: 1 },
+    { name: "example 2", done: true, id: 2 },
   ];
 
   return (
