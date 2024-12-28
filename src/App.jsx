@@ -19,8 +19,8 @@ function App() {
       </header>
       <Form />
       <ul>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} name={todo.name} done={todo.done} />
+        {todos.map(({ id, name, done }) => (
+          <TodoItem key={id} name={name} done={done} />
         ))}
       </ul>
     </div>
