@@ -1,17 +1,17 @@
 import { Button } from "../Button/Button";
 import styles from "./Form.module.css";
 
-export function Form() {
+export function Form({ onFormSubmit }) {
   return (
-    <form className={styles.form}>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        onFormSubmit();
+      }}
+      className={styles.form}
+    >
       <input type="text" className={styles.input} />
-      <Button
-        onClick={() => {
-          alert("Task added!");
-        }}
-      >
-        Add Task
-      </Button>
+      <Button>Add Task</Button>
     </form>
   );
 }
