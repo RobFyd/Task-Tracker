@@ -1,16 +1,7 @@
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { TodoItem } from "./components/TodoItem/TodoItem";
-
-function getSubheading(numberOfTasks) {
-  if (numberOfTasks === 0) {
-    return "No tasks";
-  } else if (numberOfTasks === 1) {
-    return "1 task";
-  } else {
-    return `${numberOfTasks} tasks`;
-  }
-}
+import { getSubheading } from "./utils/getSubheading";
 
 function App() {
   const todos = [
