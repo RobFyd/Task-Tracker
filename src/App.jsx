@@ -2,6 +2,16 @@ import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { TodoItem } from "./components/TodoItem/TodoItem";
 
+function getSubheading(numberOfTasks) {
+  if (numberOfTasks === 0) {
+    return "No tasks";
+  } else if (numberOfTasks === 1) {
+    return "1 task";
+  } else {
+    return `${numberOfTasks} tasks`;
+  }
+}
+
 function App() {
   const todos = [
     { name: "example 1", done: false, id: 1 },
@@ -13,7 +23,7 @@ function App() {
       <header className={styles.header}>
         <div>
           <h1>Task Tracker</h1>
-          <h2>5 tasks</h2>
+          <h2>{getSubheading(todos.length)}</h2>
         </div>
         <button className={styles.button}>+</button>
       </header>
