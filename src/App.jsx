@@ -6,10 +6,10 @@ import { getSubheading } from "./utils/getSubheading";
 
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
-  const todos = [
+  const [todos, setTodos] = useState([
     { name: "example 1", done: false, id: 1 },
     { name: "example 2", done: true, id: 2 },
-  ];
+  ]);
 
   return (
     <div className={styles.container}>
@@ -29,8 +29,11 @@ function App() {
       </header>
       {isFormShown && (
         <Form
-          onFormSubmit={() => {
-            alert("new task added");
+          onFormSubmit={(newTodoName) => {
+            setTodos((prevTodos) => [
+              ...prevTodos,
+              { name: newTodoName, done: false },
+            ]);
           }}
         />
       )}
