@@ -32,7 +32,11 @@ function App() {
           onFormSubmit={(newTodoName) => {
             setTodos((prevTodos) => [
               ...prevTodos,
-              { name: newTodoName, done: false, id: prevTodos.length + 1 },
+              {
+                name: newTodoName,
+                done: false,
+                id: prevTodos.length > 0 ? prevTodos.at(-1).id + 1 : 0,
+              },
             ]);
             setIsFormShown(false);
           }}
