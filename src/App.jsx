@@ -35,7 +35,7 @@ function App() {
               {
                 name: newTodoName,
                 done: false,
-                id: prevTodos.length > 0 ? prevTodos.at(-1).id + 1 : 0,
+                id: Math.random(),
               },
             ]);
             setIsFormShown(false);
