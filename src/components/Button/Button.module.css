@@ -12,3 +12,9 @@
     background-color: var(--color-main);
     color: white;
 }
+
+.button:disabled {
+    background-color: var(--color-disabled);
+    color: var(--color-disabled-text);
+    cursor: not-allowed;
+}
