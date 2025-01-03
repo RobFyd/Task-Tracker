@@ -18,8 +18,9 @@ export function Form({ onFormSubmit }) {
         onChange={(event) => setInputValue(event.target.value)}
         type="text"
         className={styles.input}
+        placeholder="Your task..."
       />
-      <Button>Add Task</Button>
+      <Button disabled={!inputValue.trim()}>Add Task</Button>
     </form>
   );
 }
