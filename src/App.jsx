@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { TodoItem } from "./components/TodoItem/TodoItem";
 import { getSubheading } from "./utils/getSubheading";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
@@ -34,7 +35,7 @@ function App() {
   }
 
   const moveItemUp = (index) => {
-    if (index === 0) return; // Nie można przesunąć pierwszego elementu wyżej
+    if (index === 0) return; // can't move first item up
     const updatedTodos = [...todos];
     [updatedTodos[index - 1], updatedTodos[index]] = [
       updatedTodos[index],
@@ -44,12 +45,30 @@ function App() {
   };
 
   const moveItemDown = (index) => {
-    if (index === todos.length - 1) return; // Nie można przesunąć ostatniego elementu niżej
+    if (index === todos.length - 1) return; // can't move last item down
     const updatedTodos = [...todos];
     [updatedTodos[index], updatedTodos[index + 1]] = [
       updatedTodos[index + 1],
       updatedTodos[index],
     ];
+    setTodos(updatedTodos);
+  };
+
+  // Funkcja obsługująca zmianę kolejności elementów
+  const handleDragEnd = (result) => {
+    const { destination, source } = result;
+
+    // Jeśli brak docelowego miejsca (np. element upuszczony poza listę)
+    if (!destination) return;
+
+    // Jeśli element został upuszczony na to samo miejsce
+    if (destination.index === source.index) return;
+
+    // Zmień kolejność elementów
+    const updatedTodos = Array.from(todos);
+    const [removed] = updatedTodos.splice(source.index, 1);
+    updatedTodos.splice(destination.index, 0, removed);
+
     setTodos(updatedTodos);
   };
 
