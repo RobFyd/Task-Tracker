@@ -35,7 +35,7 @@ function App() {
   }
 
   const moveItemUp = (index) => {
-    if (index === 0) return; // can't move first item up
+    if (index === 0) return; // cannot move first item up
     const updatedTodos = [...todos];
     [updatedTodos[index - 1], updatedTodos[index]] = [
       updatedTodos[index],
@@ -45,7 +45,7 @@ function App() {
   };
 
   const moveItemDown = (index) => {
-    if (index === todos.length - 1) return; // can't move last item down
+    if (index === todos.length - 1) return; // cannot move last item down
     const updatedTodos = [...todos];
     [updatedTodos[index], updatedTodos[index + 1]] = [
       updatedTodos[index + 1],
@@ -54,23 +54,22 @@ function App() {
     setTodos(updatedTodos);
   };
 
-  // Funkcja obsługująca zmianę kolejności elementów
-  const handleDragEnd = (result) => {
-    const { destination, source } = result;
+  function handleDragEnd(result) {
+    const { source, destination } = result;
 
-    // Jeśli brak docelowego miejsca (np. element upuszczony poza listę)
+    // Jeśli element nie zostanie upuszczony w odpowiednim miejscu, nic nie rób
     if (!destination) return;
 
-    // Jeśli element został upuszczony na to samo miejsce
-    if (destination.index === source.index) return;
+    // Jeśli element zostanie upuszczony na to samo miejsce, nic nie rób
+    if (source.index === destination.index) return;
 
     // Zmień kolejność elementów
     const updatedTodos = Array.from(todos);
-    const [removed] = updatedTodos.splice(source.index, 1);
-    updatedTodos.splice(destination.index, 0, removed);
+    const [movedItem] = updatedTodos.splice(source.index, 1);
+    updatedTodos.splice(destination.index, 0, movedItem);
 
     setTodos(updatedTodos);
-  };
+  }
 
   return (
     <div className={styles.container}>
