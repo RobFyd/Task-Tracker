@@ -90,19 +90,25 @@ function App() {
       {isFormShown && (
         <Form onFormSubmit={(newTodoName) => addItem(newTodoName)} />
       )}
-      <ul>
-        {todos.map(({ id, name, done }, index) => (
-          <TodoItem
-            key={id}
-            name={name}
-            done={done}
-            onDeleteButtonClick={() => deleteItem(id)}
-            onDoneButtonClick={() => doneItem(id)}
-            onMoveItemUp={() => moveItemUp(index)}
-            onMoveItemDown={() => moveItemDown(index)}
-          />
-        ))}
-      </ul>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="todos">
+          {(provided) => (
+            <ul {...provided.droppableProps} ref={provided.innerRef}>
+              {todos.map(({ id, name, done }, index) => (
+                <TodoItem
+                  key={id}
+                  name={name}
+                  done={done}
+                  onDeleteButtonClick={() => deleteItem(id)}
+                  onDoneButtonClick={() => doneItem(id)}
+                  onMoveItemUp={() => moveItemUp(index)}
+                  onMoveItemDown={() => moveItemDown(index)}
+                />
+              ))}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
