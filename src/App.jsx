@@ -38,23 +38,23 @@ function App() {
     );
   }
 
-  const moveItemUp = (index) => {
-    if (index === 0) return; // cannot move first item up
+  const moveItemToStart = (index) => {
+    if (index === 0) return; // if the item is already at the top, do nothing
+
     const updatedTodos = [...todos];
-    [updatedTodos[index - 1], updatedTodos[index]] = [
-      updatedTodos[index],
-      updatedTodos[index - 1],
-    ];
+    const [movedItem] = updatedTodos.splice(index, 1); // delete the item
+    updatedTodos.unshift(movedItem); // add the item to the beginning of the array
+
     setTodos(updatedTodos);
   };
 
-  const moveItemDown = (index) => {
-    if (index === todos.length - 1) return; // cannot move last item down
+  const moveItemToEnd = (index) => {
+    if (index === todos.length - 1) return; // if the item is already at the bottom, do nothing
+
     const updatedTodos = [...todos];
-    [updatedTodos[index], updatedTodos[index + 1]] = [
-      updatedTodos[index + 1],
-      updatedTodos[index],
-    ];
+    const [movedItem] = updatedTodos.splice(index, 1); // delete the item
+    updatedTodos.push(movedItem); // add the item to the end of the array
+
     setTodos(updatedTodos);
   };
 
@@ -108,8 +108,8 @@ function App() {
                         done={done}
                         onDeleteButtonClick={() => deleteItem(id)}
                         onDoneButtonClick={() => doneItem(id)}
-                        onMoveItemUp={() => moveItemUp(index)}
-                        onMoveItemDown={() => moveItemDown(index)}
+                        onMoveItemToStart={() => moveItemToStart(index)}
+                        onMoveItemToEnd={() => moveItemToEnd(index)}
                       />
                     </div>
                   )}
