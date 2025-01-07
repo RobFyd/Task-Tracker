@@ -10,6 +10,10 @@ function App() {
   const [todos, setTodos] = useState([
     { name: "example 1", done: false, id: 1 },
     { name: "example 2", done: true, id: 2 },
+    { name: "example 3", done: false, id: 3 },
+    { name: "example 4", done: true, id: 4 },
+    { name: "example 5", done: false, id: 5 },
+    { name: "example 6", done: true, id: 6 },
   ]);
 
   function addItem(newTodoName) {
@@ -18,7 +22,7 @@ function App() {
       {
         name: newTodoName,
         done: false,
-        id: `${Date.now()}-${Math.random()}`,
+        id: Math.random(),
       },
     ]);
     setIsFormShown(false);
@@ -56,14 +60,9 @@ function App() {
 
   function handleDragEnd(result) {
     const { source, destination } = result;
-
-    // Jeśli element nie zostanie upuszczony w odpowiednim miejscu, nic nie rób
     if (!destination) return;
-
-    // Jeśli element zostanie upuszczony na to samo miejsce, nic nie rób
     if (source.index === destination.index) return;
-
-    // Zmień kolejność elementów
+    // change the order of the items in the todos array
     const updatedTodos = Array.from(todos);
     const [movedItem] = updatedTodos.splice(source.index, 1);
     updatedTodos.splice(destination.index, 0, movedItem);
