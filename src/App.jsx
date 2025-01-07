@@ -95,16 +95,27 @@ function App() {
           {(provided) => (
             <ul {...provided.droppableProps} ref={provided.innerRef}>
               {todos.map(({ id, name, done }, index) => (
-                <TodoItem
-                  key={id}
-                  name={name}
-                  done={done}
-                  onDeleteButtonClick={() => deleteItem(id)}
-                  onDoneButtonClick={() => doneItem(id)}
-                  onMoveItemUp={() => moveItemUp(index)}
-                  onMoveItemDown={() => moveItemDown(index)}
-                />
+                <Draggable key={id} draggableId={id.toString()} index={index}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <TodoItem
+                        key={id}
+                        name={name}
+                        done={done}
+                        onDeleteButtonClick={() => deleteItem(id)}
+                        onDoneButtonClick={() => doneItem(id)}
+                        onMoveItemUp={() => moveItemUp(index)}
+                        onMoveItemDown={() => moveItemDown(index)}
+                      />
+                    </div>
+                  )}
+                </Draggable>
               ))}
+              {provided.placeholder}
             </ul>
           )}
         </Droppable>
