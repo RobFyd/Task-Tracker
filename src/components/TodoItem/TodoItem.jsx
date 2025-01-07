@@ -6,8 +6,8 @@ export function TodoItem({
   done,
   onDeleteButtonClick,
   onDoneButtonClick,
-  onMoveItemUp,
-  onMoveItemDown,
+  onMoveItemToStart,
+  onMoveItemToEnd,
 }) {
   return (
     <li className={styles.item}>
@@ -17,8 +17,8 @@ export function TodoItem({
       {!done && <Button onClick={onDoneButtonClick}>Done</Button>}
       <Button onClick={onDeleteButtonClick}>Remove</Button>
       <div>
-        <Button onClick={onMoveItemUp}>⬆</Button>
-        <Button onClick={onMoveItemDown}>⬇</Button>
+        <Button onClick={onMoveItemToStart}>⬆</Button>
+        <Button onClick={onMoveItemToEnd}>⬇</Button>
       </div>
     </li>
   );
