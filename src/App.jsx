@@ -18,7 +18,7 @@ function App() {
       {
         name: newTodoName,
         done: false,
-        id: Math.random(),
+        id: `${Date.now()}-${Math.random()}`,
       },
     ]);
     setIsFormShown(false);
@@ -101,6 +101,7 @@ function App() {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      className={styles.draggableItem} // new class for draggable item
                     >
                       <TodoItem
                         key={id}
