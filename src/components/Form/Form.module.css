@@ -1,7 +1,7 @@
 .form {
     display: flex;
     gap: 12px;
-    margin-top: 24px;
+    margin: 18px 0;
 }
 
 .input {
@@ -10,5 +10,3 @@
     border: 1px solid currentColor;
     border-radius: 4px;
 }
-
-.button {}
