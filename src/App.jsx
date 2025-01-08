@@ -23,6 +23,7 @@ function App() {
         name: newTodoName,
         done: false,
         id: Math.random(),
+        isEditing: false,
       },
     ]);
     setIsFormShown(false);
@@ -111,7 +112,7 @@ function App() {
         <Droppable droppableId="todos">
           {(provided) => (
             <ul {...provided.droppableProps} ref={provided.innerRef}>
-              {todos.map(({ id, name, done }, index) => (
+              {todos.map(({ id, name, done, isEditing }, index) => (
                 <Draggable key={id} draggableId={id.toString()} index={index}>
                   {(provided) => (
                     <div
@@ -124,10 +125,15 @@ function App() {
                         key={id}
                         name={name}
                         done={done}
+                        isEditing={isEditing}
                         onDeleteButtonClick={() => deleteItem(id)}
                         onToggleDoneClick={() => toggleDone(id)}
                         onMoveItemToStart={() => moveItemToStart(index)}
                         onMoveItemToEnd={() => moveItemToEnd(index)}
+                        onToggleEdit={() => toggleEdit(id)}
+                        onUpdateTaskName={(newName) =>
+                          updateTaskName(id, newName)
+                        }
                       />
                     </div>
                   )}
