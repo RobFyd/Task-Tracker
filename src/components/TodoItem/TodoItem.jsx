@@ -17,8 +17,12 @@ export function TodoItem({
       {!done && <Button onClick={onDoneButtonClick}>Done</Button>}
       <Button onClick={onDeleteButtonClick}>Remove</Button>
       <div>
-        <Button onClick={onMoveItemToStart}>⬆</Button>
-        <Button onClick={onMoveItemToEnd}>⬇</Button>
+        <Button onClick={onMoveItemToStart} title="move to start">
+          ⬆
+        </Button>
+        <Button onClick={onMoveItemToEnd} title="move to end">
+          ⬇
+        </Button>
       </div>
     </li>
   );

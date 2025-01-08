@@ -1,8 +1,13 @@
 import styles from "./Button.module.css";
 
-export function Button({ children, onClick, disabled }) {
+export function Button({ children, onClick, disabled, ...props }) {
   return (
-    <button className={styles.button} onClick={onClick} disabled={disabled}>
+    <button
+      {...props}
+      className={styles.button}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
