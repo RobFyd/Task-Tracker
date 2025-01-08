@@ -32,9 +32,11 @@ function App() {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
 
-  function doneItem(id) {
+  function toggleDone(id) {
     setTodos((prevTodos) =>
-      prevTodos.map((todo) => (todo.id === id ? { ...todo, done: true } : todo))
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      )
     );
   }
 
@@ -107,7 +109,7 @@ function App() {
                         name={name}
                         done={done}
                         onDeleteButtonClick={() => deleteItem(id)}
-                        onDoneButtonClick={() => doneItem(id)}
+                        onToggleDoneClick={() => toggleDone(id)}
                         onMoveItemToStart={() => moveItemToStart(index)}
                         onMoveItemToEnd={() => moveItemToEnd(index)}
                       />
