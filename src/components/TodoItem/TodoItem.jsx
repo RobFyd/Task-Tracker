@@ -30,7 +30,7 @@ export function TodoItem({
           type="text"
           value={editValue}
           onChange={handleInputChange}
-          onBlur={() => onUpdateTaskName(editValue)} // Zatwierdź po wyjściu z pola
+          onBlur={() => onUpdateTaskName(editValue)} // confirm changes on blur
           onKeyDown={handleInputKeyPress}
           autoFocus
         />

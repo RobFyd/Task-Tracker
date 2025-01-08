@@ -16,3 +16,18 @@
 .done {
     text-decoration: line-through;
 }
+
+span {
+    cursor: text;
+}
+
+input {
+    padding: 6px;
+    font-size: 16px;
+    color: var(--color-main);
+    border: 1px solid #ccc;
+    border-color: var(--color-main);
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+}
