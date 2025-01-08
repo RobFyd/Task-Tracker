@@ -8,12 +8,12 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
   const [todos, setTodos] = useState([
-    { name: "example 1", done: false, id: 1 },
-    { name: "example 2", done: true, id: 2 },
-    { name: "example 3", done: false, id: 3 },
-    { name: "example 4", done: true, id: 4 },
-    { name: "example 5", done: false, id: 5 },
-    { name: "example 6", done: true, id: 6 },
+    { name: "example 1", done: false, id: 1, isEditing: false },
+    { name: "example 2", done: true, id: 2, isEditing: false },
+    { name: "example 3", done: false, id: 3, isEditing: false },
+    { name: "example 4", done: true, id: 4, isEditing: false },
+    { name: "example 5", done: false, id: 5, isEditing: false },
+    { name: "example 6", done: true, id: 6, isEditing: false },
   ]);
 
   function addItem(newTodoName) {
@@ -70,6 +70,22 @@ function App() {
     updatedTodos.splice(destination.index, 0, movedItem);
 
     setTodos(updatedTodos);
+  }
+
+  function toggleEdit(id) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+      )
+    );
+  }
+
+  function updateTaskName(id, newName) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, name: newName, isEditing: false } : todo
+      )
+    );
   }
 
   return (
