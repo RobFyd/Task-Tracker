@@ -18,11 +18,15 @@
     background-color: var(--color-main);
     border: 0;
     color: white;
-    width: 50px;
-    font-size: 32px;
+    width: 60px;
+    font-size: 44px;
     aspect-ratio: 1;
     border-radius: 50%;
     cursor: pointer;
+}
+
+h1 {
+    padding-bottom: 10px;
 }
 
 .draggableItem {

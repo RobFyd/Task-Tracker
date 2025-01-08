@@ -100,6 +100,7 @@ function App() {
           <button
             onClick={() => setIsFormShown(true)}
             className={styles.button}
+            title="add new task"
           >
             +
           </button>
