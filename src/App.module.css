@@ -11,6 +11,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 100px;
+    margin-bottom: 20px;
 }
 
 .button {
@@ -26,12 +27,15 @@
 
 .draggableItem {
     list-style-type: none;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 8px;
-    background-color: white;
+    background-color: hsl(261, 47%, 92%);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: grab;
-    /* Ręka, która sugeruje, że element można przeciągnąć */
+}
+
+.draggableItem:hover {
+    border-color: var(--color-main);
 }
