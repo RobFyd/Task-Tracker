@@ -1,7 +1,16 @@
 # Drag & Drop Task Tracker
-### A simple task list application built using React and Vite.
+### A simple task management app built with React and Vite. It allows you to add, remove, and mark tasks as done.
 
+## Functionalities
+- Adding new tasks
+- Marking tasks as done
+- Deleting tasks
+- Moving tasks
 
+## Technologies
+![TechnologiesIcons](https://skillicons.dev/icons?i=html,css,js,react,vite,git,vscode)
+
+## Screenshot
 
 npm run dev
 
