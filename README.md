@@ -15,7 +15,7 @@
 
 ## Screenshot
 
-![Screenshot](public\tasktrack.png)
+![Screenshot](https://github.com/RobFyd/Task-Tracker/blob/main/public/tasktrack.png)
 
 npm run dev
 
