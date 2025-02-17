@@ -5,10 +5,6 @@ import { TodoItem } from "./components/TodoItem/TodoItem";
 import { getSubheading } from "./utils/getSubheading";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-function deleteItem(id, setter) {
-  setter((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-}
-
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
   const [todos, setTodos] = useState([
@@ -31,6 +27,10 @@ function App() {
       },
     ]);
     setIsFormShown(false);
+  }
+
+  function deleteItem(id) {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
 
   function toggleDone(id) {
@@ -127,7 +127,7 @@ function App() {
                         name={name}
                         done={done}
                         isEditing={isEditing}
-                        onDeleteButtonClick={() => deleteItem(id, setTodos)}
+                        onDeleteButtonClick={() => deleteItem(id)}
                         onToggleDoneClick={() => toggleDone(id)}
                         onMoveItemToStart={() => moveItemToStart(index)}
                         onMoveItemToEnd={() => moveItemToEnd(index)}
