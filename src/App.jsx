@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { TodoItem } from "./components/TodoItem/TodoItem";
 import { getSubheading } from "./utils/getSubheading";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+function todosReducer(state) {
+  return state;
+}
+
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
-  const [todos, setTodos] = useState([
+  const [setTodos] = useState([
+    { name: "example 1", done: false, id: 1, isEditing: false },
+    { name: "example 2", done: true, id: 2, isEditing: false },
+    { name: "example 3", done: false, id: 3, isEditing: false },
+    { name: "example 4", done: true, id: 4, isEditing: false },
+    { name: "example 5", done: false, id: 5, isEditing: false },
+    { name: "example 6", done: true, id: 6, isEditing: false },
+  ]);
+
+  const [todos] = useReducer(todosReducer, [
     { name: "example 1", done: false, id: 1, isEditing: false },
     { name: "example 2", done: true, id: 2, isEditing: false },
     { name: "example 3", done: false, id: 3, isEditing: false },
