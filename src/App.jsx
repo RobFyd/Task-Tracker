@@ -5,8 +5,10 @@ import { TodoItem } from "./components/TodoItem/TodoItem";
 import { getSubheading } from "./utils/getSubheading";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-function todosReducer(state) {
-  return state;
+function todosReducer(state, data) {
+  console.log("reducer!!!");
+  console.log(data);
+  return state.filter((todo) => todo.id !== data);
 }
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
     { name: "example 6", done: true, id: 6, isEditing: false },
   ]);
 
-  const [todos] = useReducer(todosReducer, [
+  const [todos, dispatch] = useReducer(todosReducer, [
     { name: "example 1", done: false, id: 1, isEditing: false },
     { name: "example 2", done: true, id: 2, isEditing: false },
     { name: "example 3", done: false, id: 3, isEditing: false },
@@ -43,16 +45,17 @@ function App() {
   }
 
   function deleteItem(id) {
+    dispatch(id);
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
 
-  function toggleDone(id) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
-    );
-  }
+  // function toggleDone(id) {
+  //   setTodos((prevTodos) =>
+  //     prevTodos.map((todo) =>
+  //       todo.id === id ? { ...todo, done: !todo.done } : todo
+  //     )
+  //   );
+  // }
 
   const moveItemToStart = (index) => {
     if (index === 0) return; // if the item is already at the top, do nothing
@@ -141,7 +144,7 @@ function App() {
                         done={done}
                         isEditing={isEditing}
                         onDeleteButtonClick={() => deleteItem(id)}
-                        onToggleDoneClick={() => toggleDone(id)}
+                        // onToggleDoneClick={() => toggleDone(id)}
                         onMoveItemToStart={() => moveItemToStart(index)}
                         onMoveItemToEnd={() => moveItemToEnd(index)}
                         onToggleEdit={() => toggleEdit(id)}
