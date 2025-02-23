@@ -3,7 +3,8 @@
     background-color: white;
     padding: 32px 24px;
     border-radius: 12px;
-    max-width: 800px;
+    max-width: 600px;
+    min-width: 600px;
 }
 
 .header {

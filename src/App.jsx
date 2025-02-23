@@ -31,14 +31,6 @@ function todosReducer(state, action) {
 
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
-  const [setTodos] = useState([
-    { name: "example 1", done: false, id: 1, isEditing: false },
-    { name: "example 2", done: true, id: 2, isEditing: false },
-    { name: "example 3", done: false, id: 3, isEditing: false },
-    { name: "example 4", done: true, id: 4, isEditing: false },
-    { name: "example 5", done: false, id: 5, isEditing: false },
-    { name: "example 6", done: true, id: 6, isEditing: false },
-  ]);
 
   const [todos, dispatch] = useReducer(todosReducer, [
     { name: "example 1", done: false, id: 1, isEditing: false },
@@ -51,6 +43,7 @@ function App() {
 
   function addItem(newTodoName) {
     dispatch({ type: "add", newTodoName });
+    setIsFormShown(false);
   }
 
   function deleteItem(id) {
