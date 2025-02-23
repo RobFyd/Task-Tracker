@@ -47,6 +47,16 @@ function todosReducer(state, action) {
 
     return updatedTodos;
   }
+
+  if (action.type === "reorder") {
+    const { source, destination } = action.result;
+    if (!destination) return state;
+    const updatedTodos = [...state];
+    const [movedItem] = updatedTodos.splice(source.index, 1);
+    updatedTodos.splice(destination.index, 0, movedItem);
+
+    return updatedTodos;
+  }
 }
 
 function App() {
@@ -91,15 +101,7 @@ function App() {
   };
 
   function handleDragEnd(result) {
-    const { source, destination } = result;
-    if (!destination) return;
-    if (source.index === destination.index) return;
-    // change the order of the items in the todos array
-    const updatedTodos = Array.from(todos);
-    const [movedItem] = updatedTodos.splice(source.index, 1);
-    updatedTodos.splice(destination.index, 0, movedItem);
-
-    setTodos(updatedTodos);
+    dispatch({ type: "reorder", result });
   }
 
   function toggleEdit(id) {
