@@ -27,10 +27,28 @@ function todosReducer(state, action) {
       },
     ];
   }
+
+  if (action.type === "moveToStart") {
+    if (action.index === 0) return state; // if the item is already at the top, do nothing
+
+    const updatedTodos = [...state];
+    const [movedItem] = updatedTodos.splice(action.index, 1); // delete the item
+    updatedTodos.unshift(movedItem); // add the item to the start of the array
+
+    return updatedTodos;
+  }
 }
 
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
+  const [setTodos] = useState([
+    { name: "example 1", done: false, id: 1, isEditing: false },
+    { name: "example 2", done: true, id: 2, isEditing: false },
+    { name: "example 3", done: false, id: 3, isEditing: false },
+    { name: "example 4", done: true, id: 4, isEditing: false },
+    { name: "example 5", done: false, id: 5, isEditing: false },
+    { name: "example 6", done: true, id: 6, isEditing: false },
+  ]);
 
   const [todos, dispatch] = useReducer(todosReducer, [
     { name: "example 1", done: false, id: 1, isEditing: false },
@@ -55,13 +73,7 @@ function App() {
   }
 
   const moveItemToStart = (index) => {
-    if (index === 0) return; // if the item is already at the top, do nothing
-
-    const updatedTodos = [...todos];
-    const [movedItem] = updatedTodos.splice(index, 1); // delete the item
-    updatedTodos.unshift(movedItem); // add the item to the beginning of the array
-
-    setTodos(updatedTodos);
+    dispatch({ type: "moveToStart", index });
   };
 
   const moveItemToEnd = (index) => {
