@@ -37,6 +37,16 @@ function todosReducer(state, action) {
 
     return updatedTodos;
   }
+
+  if (action.type === "moveToEnd") {
+    if (action.index === state.length - 1) return state; // if the item is already at the bottom, do nothing
+
+    const updatedTodos = [...state];
+    const [movedItem] = updatedTodos.splice(action.index, 1); // delete the item
+    updatedTodos.push(movedItem); // add the item to the end of the array
+
+    return updatedTodos;
+  }
 }
 
 function App() {
@@ -77,13 +87,7 @@ function App() {
   };
 
   const moveItemToEnd = (index) => {
-    if (index === todos.length - 1) return; // if the item is already at the bottom, do nothing
-
-    const updatedTodos = [...todos];
-    const [movedItem] = updatedTodos.splice(index, 1); // delete the item
-    updatedTodos.push(movedItem); // add the item to the end of the array
-
-    setTodos(updatedTodos);
+    dispatch({ type: "moveToEnd", index });
   };
 
   function handleDragEnd(result) {
