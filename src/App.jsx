@@ -15,6 +15,18 @@ function todosReducer(state, action) {
       todo.id === action.id ? { ...todo, done: !todo.done } : todo
     );
   }
+
+  if (action.type === "add") {
+    return [
+      ...state,
+      {
+        name: action.newTodoName,
+        done: false,
+        id: Math.random(),
+        isEditing: false,
+      },
+    ];
+  }
 }
 
 function App() {
@@ -38,16 +50,7 @@ function App() {
   ]);
 
   function addItem(newTodoName) {
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      {
-        name: newTodoName,
-        done: false,
-        id: Math.random(),
-        isEditing: false,
-      },
-    ]);
-    setIsFormShown(false);
+    dispatch({ type: "add", newTodoName });
   }
 
   function deleteItem(id) {
