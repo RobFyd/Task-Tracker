@@ -57,6 +57,14 @@ function todosReducer(state, action) {
 
     return updatedTodos;
   }
+
+  if (action.type === "edit") {
+    return state.map((todo) =>
+      todo.id === action.id
+        ? { ...todo, isEditing: !todo.isEditing }
+        : { ...todo, isEditing: false }
+    );
+  }
 }
 
 function App() {
@@ -105,11 +113,7 @@ function App() {
   }
 
   function toggleEdit(id) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
-      )
-    );
+    dispatch({ type: "edit", id });
   }
 
   function updateTaskName(id, newName) {
