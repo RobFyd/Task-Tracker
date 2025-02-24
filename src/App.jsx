@@ -1,80 +1,13 @@
-import { useState, useReducer } from "react";
+import { useState } from "react";
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { TodoItem } from "./components/TodoItem/TodoItem";
 import { getSubheading } from "./utils/getSubheading";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-function todosReducer(state, action) {
-  if (action.type === "delete") {
-    return state.filter((todo) => todo.id !== action.id);
-  }
-
-  if (action.type === "finish") {
-    return state.map((todo) =>
-      todo.id === action.id ? { ...todo, done: !todo.done } : todo
-    );
-  }
-
-  if (action.type === "add") {
-    return [
-      ...state,
-      {
-        name: action.newTodoName,
-        done: false,
-        id: Math.random(),
-        isEditing: false,
-      },
-    ];
-  }
-
-  if (action.type === "moveToStart") {
-    if (action.index === 0) return state; // if the item is already at the top, do nothing
-
-    const updatedTodos = [...state];
-    const [movedItem] = updatedTodos.splice(action.index, 1); // delete the item
-    updatedTodos.unshift(movedItem); // add the item to the start of the array
-
-    return updatedTodos;
-  }
-
-  if (action.type === "moveToEnd") {
-    if (action.index === state.length - 1) return state; // if the item is already at the bottom, do nothing
-
-    const updatedTodos = [...state];
-    const [movedItem] = updatedTodos.splice(action.index, 1); // delete the item
-    updatedTodos.push(movedItem); // add the item to the end of the array
-
-    return updatedTodos;
-  }
-
-  if (action.type === "reorder") {
-    const { source, destination } = action.result;
-    if (!destination) return state;
-    const updatedTodos = [...state];
-    const [movedItem] = updatedTodos.splice(source.index, 1);
-    updatedTodos.splice(destination.index, 0, movedItem);
-
-    return updatedTodos;
-  }
-
-  if (action.type === "edit") {
-    return state.map((todo) =>
-      todo.id === action.id ? { ...todo, isEditing: !todo.isEditing } : todo
-    );
-  }
-
-  if (action.type === "update") {
-    return state.map((todo) =>
-      todo.id === action.id ? { ...todo, name: action.newName } : todo
-    );
-  }
-}
-
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
-
-  const [todos, dispatch] = useReducer(todosReducer, [
+  const [todos, setTodos] = useState([
     { name: "example 1", done: false, id: 1, isEditing: false },
     { name: "example 2", done: true, id: 2, isEditing: false },
     { name: "example 3", done: false, id: 3, isEditing: false },
@@ -84,36 +17,76 @@ function App() {
   ]);
 
   function addItem(newTodoName) {
-    dispatch({ type: "add", newTodoName });
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      {
+        name: newTodoName,
+        done: false,
+        id: Math.random(),
+        isEditing: false,
+      },
+    ]);
     setIsFormShown(false);
   }
 
   function deleteItem(id) {
-    dispatch({ type: "delete", id });
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
 
   function toggleDone(id) {
-    dispatch({ type: "finish", id });
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      )
+    );
   }
 
   const moveItemToStart = (index) => {
-    dispatch({ type: "moveToStart", index });
+    if (index === 0) return; // if the item is already at the top, do nothing
+
+    const updatedTodos = [...todos];
+    const [movedItem] = updatedTodos.splice(index, 1); // delete the item
+    updatedTodos.unshift(movedItem); // add the item to the beginning of the array
+
+    setTodos(updatedTodos);
   };
 
   const moveItemToEnd = (index) => {
-    dispatch({ type: "moveToEnd", index });
+    if (index === todos.length - 1) return; // if the item is already at the bottom, do nothing
+
+    const updatedTodos = [...todos];
+    const [movedItem] = updatedTodos.splice(index, 1); // delete the item
+    updatedTodos.push(movedItem); // add the item to the end of the array
+
+    setTodos(updatedTodos);
   };
 
   function handleDragEnd(result) {
-    dispatch({ type: "reorder", result });
+    const { source, destination } = result;
+    if (!destination) return;
+    if (source.index === destination.index) return;
+    // change the order of the items in the todos array
+    const updatedTodos = Array.from(todos);
+    const [movedItem] = updatedTodos.splice(source.index, 1);
+    updatedTodos.splice(destination.index, 0, movedItem);
+
+    setTodos(updatedTodos);
   }
 
   function toggleEdit(id) {
-    dispatch({ type: "edit", id });
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+      )
+    );
   }
 
   function updateTaskName(id, newName) {
-    dispatch({ type: "update", id, newName });
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, name: newName, isEditing: false } : todo
+      )
+    );
   }
 
   return (
