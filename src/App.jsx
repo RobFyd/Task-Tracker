@@ -60,23 +60,19 @@ function todosReducer(state, action) {
 
   if (action.type === "edit") {
     return state.map((todo) =>
-      todo.id === action.id
-        ? { ...todo, isEditing: !todo.isEditing }
-        : { ...todo, isEditing: false }
+      todo.id === action.id ? { ...todo, isEditing: !todo.isEditing } : todo
+    );
+  }
+
+  if (action.type === "update") {
+    return state.map((todo) =>
+      todo.id === action.id ? { ...todo, name: action.newName } : todo
     );
   }
 }
 
 function App() {
   const [isFormShown, setIsFormShown] = useState(false);
-  const [setTodos] = useState([
-    { name: "example 1", done: false, id: 1, isEditing: false },
-    { name: "example 2", done: true, id: 2, isEditing: false },
-    { name: "example 3", done: false, id: 3, isEditing: false },
-    { name: "example 4", done: true, id: 4, isEditing: false },
-    { name: "example 5", done: false, id: 5, isEditing: false },
-    { name: "example 6", done: true, id: 6, isEditing: false },
-  ]);
 
   const [todos, dispatch] = useReducer(todosReducer, [
     { name: "example 1", done: false, id: 1, isEditing: false },
@@ -117,11 +113,7 @@ function App() {
   }
 
   function updateTaskName(id, newName) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, name: newName, isEditing: false } : todo
-      )
-    );
+    dispatch({ type: "update", id, newName });
   }
 
   return (
